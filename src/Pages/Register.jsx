@@ -79,8 +79,8 @@ const Register = () => {
                                     className="select select-bordered"
                                 >
                                     <option value="worker">Admin</option>
-                                    <option value="worker">Worker</option>
-                                    <option value="buyer">Buyer</option>
+                                    <option value="worker">Customer</option>
+                                    <option value="buyer">Seller</option>
                                 </select>
                                 {errors.role && <span className="text-red-600">{errors.role.message}</span>}
                             </div>
