@@ -1,11 +1,31 @@
 
 import { Link } from 'react-router-dom';
 import 'animate.css';
+import { useEffect, useState } from 'react';
+import { CiLight } from 'react-icons/ci';
+import { MdDarkMode } from 'react-icons/md';
 
 const Navbar = () => {
+  //dark light theme
+  //lS store key-value pairs.data stay after refreshes or closes the browser.('key', 'value') → to store data('key') → to retrieve data
+
+  const [darkMode, setDarkMode] = useState(//store the current theme
+      localStorage.getItem("theme") === "dark"//theme is the key to save dark in LS
+    );
+   useEffect(() => {//update when the them changes
+      if (darkMode) {// true false
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+      }
+    }, [darkMode]);
   
+
+
   return (
-    <div className="navbar mb-3 bg-zinc-100 py-4 rounded-3xl bg-transparent sticky top-0 z-50 shadow-sm px-5">
+    <div className="navbar mb-3  py-4 rounded-3xl bg-transparent sticky top-0 z-50 shadow-sm px-5">
       {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -41,7 +61,9 @@ const Navbar = () => {
            
             <Link to="/" className="block text-3xl  text-center mt-3">
     
-      <span className="animate__animated animate__pulse animate__infinite animate__delay-1s text-3xl"> NeoMartX</span>
+     <h1 className="animate__animated animate__pulse
+      animate__infinite">NeoMartX</h1>
+
      
     </Link>
           </div>
@@ -61,7 +83,21 @@ const Navbar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end">
-       <Link to="/login" className="btn ">Login</Link>
+        <button
+      onClick={() => setDarkMode(!darkMode)}//toggle
+      style={{
+        padding: "10px",
+        borderRadius: "50%",
+        backgroundColor: darkMode ? "#333" : "#ddd",
+        color: darkMode ? "#fff" : "#000",
+        border: "none",
+        cursor: "pointer",
+       
+      }}
+    >
+      {darkMode ? <MdDarkMode size={24} /> : <CiLight size={24} />}
+    </button>
+       <Link to="/login" className="btn ml-2">Login</Link>
    <Link to="/register" className="btn  text-black ml-2">Signup</Link>
       </div>
     </div>
