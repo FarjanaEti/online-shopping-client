@@ -7,14 +7,15 @@ import lottieAnimation from "../assets/Animation - 1733851369003.json";
 import { FaGoogle } from "react-icons/fa";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import AuthContext from "../Provider/AuthContext";
+
 
 
 const Register = () => {
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const { createUser } = useContext(AuthContext);
+    const { createUser,googleSignIn} = useContext(AuthContext);
     const onSubmit = async (data) => {
         try {
                      
@@ -54,48 +55,54 @@ const Register = () => {
     };
 
     //google signup
-    // const handleGoogleLogin = () => {
-    //     googleSignIn()
-    //       .then((res) => {
-    //         const user = res.user;
-    //         if (!user?.email || !user?.displayName) {
-    //           throw new Error('Missing essential user data from Google login');
-    //         }
-    
-    //         const userInfo = {
-    //           email: user?.email,
-    //           name: user?.displayName,
-    //           photoURL: user?.photoURL || 'default-image-url',  // Default fallback
-    //           role: 'worker',  
-    //           coin: 50,         
-    //         };
-    
-    //         console.log('Sending user data to backend:', userInfo);
-    
-    //         axiosPublic
-    //           .post('/users', userInfo)
-    //           .then((res) => {
-    //             console.log('User data stored:', res.data);
-    //             navigate('/login');
-    //           })
-    //           .catch((error) => {
-    //             console.error('Error storing user data:', error);
-    //             Swal.fire({
-    //               icon: 'error',
-    //               title: 'Error',
-    //               text: error.response?.data?.message || error.message,
-    //             });
-    //           });
-    //       })
-    //       .catch((err) => {
-    //         console.error('Google login failed:', err);
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: 'Google Login Failed',
-    //           text: err.message || 'Something went wrong with Google sign-in.',
-    //         });
-    //       });
-    // };
+     const handleGoogleLogin = () => {
+  googleSignIn()
+    .then((res) => {
+      const user = res.user;
+      if (!user?.email || !user?.displayName) {
+        throw new Error('Missing essential user data from Google login');
+      }
+
+      const userInfo = {
+        email: user?.email,
+        name: user?.displayName,
+        role: 'worker',
+      };
+
+      console.log('Sending user data to backend:', userInfo);
+
+      axiosPublic
+        .post('/users', userInfo)
+        .then((res) => {
+          console.log('User inserted:', res.data);
+          navigate('/');
+        })
+        .catch((error) => {
+          if (error.response?.status === 400 && error.response?.data?.message === "User already exist") {
+            // ✅ User already exists – treat it as success
+            console.warn("User already exists, proceeding to login...");
+            navigate('/');
+          } else {
+            // ❌ Unexpected error – show alert
+            console.error('Error storing user data:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.response?.data?.message || error.message,
+            });
+          }
+        });
+    })
+    .catch((err) => {
+      console.error('Google login failed:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Google Login Failed',
+        text: err.message || 'Something went wrong with Google sign-in.',
+      });
+    });
+};
+
 
     return (
         <>
@@ -187,7 +194,7 @@ const Register = () => {
                         <div className="divider">OR</div>
 
                         <div className="card-body">
-                            <button  className="btn btn-outline btn-primary">
+                            <button onClick={handleGoogleLogin} className="btn btn-outline btn-primary">
                                 <FaGoogle className="mr-2" />
                                 Sign up with Google
                             </button>

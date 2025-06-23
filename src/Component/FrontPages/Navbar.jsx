@@ -1,11 +1,15 @@
 
 import { Link } from 'react-router-dom';
 import 'animate.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CiLight } from 'react-icons/ci';
 import { MdDarkMode } from 'react-icons/md';
+import AuthContext from '../../Provider/AuthContext';
+
 
 const Navbar = () => {
+   const { user } = useContext(AuthContext);   
+   console.log(user);
   //dark light theme
   //lS store key-value pairs.data stay after refreshes or closes the browser.('key', 'value') → to store data('key') → to retrieve data
 
@@ -83,6 +87,15 @@ const Navbar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end">
+       {user ? (
+                <img
+                    src={user.
+                        photoURL
+                         || "https://picsum.photos/150"}
+                    alt="user"
+                    className="w-10 mr-1 h-10 rounded-full border"
+                />
+            ) : null}
         <button
       onClick={() => setDarkMode(!darkMode)}//toggle
       style={{
