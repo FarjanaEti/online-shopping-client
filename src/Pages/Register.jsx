@@ -5,33 +5,97 @@ import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import lottieAnimation from "../assets/Animation - 1733851369003.json";
 import { FaGoogle } from "react-icons/fa";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
+    const { createUser } = useContext(AuthContext);
     const onSubmit = async (data) => {
-        console.log("Form data:", data);
-        // Just show success message for now
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Form submitted. Implement createUser later.",
-            showConfirmButton: false,
-            timer: 1500,
-        });
-        reset();
-        navigate("/login");
+        try {
+                     
+            const result = await createUser(data.email, data.password);
+            const _loggedUser = result.user;
+
+            //await updateUserProfile(data.name, uploadedImageUrl || data.photoURL); // Use uploaded image URL if successful
+
+            const userInfo = {
+                name: data.name,
+                email: data.email,
+                //url: uploadedImageUrl || data.photoURL, // Use uploaded image URL or original photo URL
+                role: data.role,
+                coin: data.role === "worker" ? 10 : 50,
+            };
+
+            const res = await axiosPublic.post("/users", userInfo);
+            if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User created successfully.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Error signing up user:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.message || "Something went wrong. Please try again.",
+            });
+        }
     };
 
-    const handleGoogleLogin = () => {
-        Swal.fire({
-            icon: 'info',
-            title: 'Google sign-up not implemented',
-            text: 'You can add Google login functionality later.',
-        });
-    };
+    //google signup
+    // const handleGoogleLogin = () => {
+    //     googleSignIn()
+    //       .then((res) => {
+    //         const user = res.user;
+    //         if (!user?.email || !user?.displayName) {
+    //           throw new Error('Missing essential user data from Google login');
+    //         }
+    
+    //         const userInfo = {
+    //           email: user?.email,
+    //           name: user?.displayName,
+    //           photoURL: user?.photoURL || 'default-image-url',  // Default fallback
+    //           role: 'worker',  
+    //           coin: 50,         
+    //         };
+    
+    //         console.log('Sending user data to backend:', userInfo);
+    
+    //         axiosPublic
+    //           .post('/users', userInfo)
+    //           .then((res) => {
+    //             console.log('User data stored:', res.data);
+    //             navigate('/login');
+    //           })
+    //           .catch((error) => {
+    //             console.error('Error storing user data:', error);
+    //             Swal.fire({
+    //               icon: 'error',
+    //               title: 'Error',
+    //               text: error.response?.data?.message || error.message,
+    //             });
+    //           });
+    //       })
+    //       .catch((err) => {
+    //         console.error('Google login failed:', err);
+    //         Swal.fire({
+    //           icon: 'error',
+    //           title: 'Google Login Failed',
+    //           text: err.message || 'Something went wrong with Google sign-in.',
+    //         });
+    //       });
+    // };
 
     return (
         <>
@@ -123,7 +187,7 @@ const Register = () => {
                         <div className="divider">OR</div>
 
                         <div className="card-body">
-                            <button onClick={handleGoogleLogin} className="btn btn-outline btn-primary">
+                            <button  className="btn btn-outline btn-primary">
                                 <FaGoogle className="mr-2" />
                                 Sign up with Google
                             </button>
