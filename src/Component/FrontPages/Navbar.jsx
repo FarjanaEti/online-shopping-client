@@ -26,7 +26,9 @@ const Navbar = () => {
       }
     }, [darkMode]);
   
+   const handleLogOut=()=>{
 
+   }
 
   return (
     <div className="navbar mb-3  py-4 rounded-3xl bg-transparent sticky top-0 z-50 shadow-sm px-10">
@@ -110,8 +112,16 @@ const Navbar = () => {
     >
       {darkMode ? <MdDarkMode size={24} /> : <CiLight size={24} />}
     </button>
-       <Link to="/login" className="btn ml-2">Login</Link>
-   <Link to="/register" className="btn  text-black ml-2">Signup</Link>
+        {user ? (
+                <li className="inline-block mx-2">
+                    <button onClick={handleLogOut} className="">LogOut</button>
+                </li>
+            ) : (
+                <>
+                    <li className="inline-block mx-2"><Link to="/login">LogIn</Link></li>
+                    <li className="inline-block mx-2"><Link to="/register">SignUp</Link></li>
+                </>
+            )}
       </div>
     </div>
   );
