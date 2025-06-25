@@ -5,6 +5,7 @@ import Layout from '../Layout/Layout'
 import Error from '../Component/Error'
 import Login from '../Pages/Login'
 import Register from '../Pages/Register'
+import DashBoard from '../Component/DashBoard/DashBoard'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,12 @@ const router = createBrowserRouter([
    element:<Register></Register>
   }
     ]
+  },
+  {
+    path:'/dashboard',
+    element:<DashBoard></DashBoard>
   }
+
 ])
 
 export default router

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "1",
+    "title": "Samsung 253L Frost Free Refrigerator",
+    "category": "Home Appliance",
+    "description": "Double door fridge with digital inverter compressor and toughened glass shelves.",
+    "price": 45000,
+    "image": "https://example.com/images/fridge.jpg",
+    "stock": 12,
+    "rating": 4.5,
+    "specs": {
+      "capacity": "253L",
+      "color": "Elegant Inox",
+      "warranty": "1 year on product, 10 years on compressor"
+    }
+  },
+  {
+    "id": "2",
+    "title": "Men's Leather Jacket",
+    "category": "Men Wardrobe",
+    "description": "Premium quality brown leather jacket for winter.",
+    "price": 6999,
+    "image": "https://example.com/images/mens-jacket.jpg",
+    "stock": 20,
+    "rating": 4.2,
+    "specs": {
+      "material": "Genuine Leather",
+      "size": "M, L, XL",
+      "color": "Brown"
+    }
+  },
+  {
+    "id": "3",
+    "title": "Women's Designer Saree",
+    "category": "Women Wardrobe",
+    "description": "Elegant embroidered georgette saree for festive occasions.",
+    "price": 3499,
+    "image": "https://example.com/images/women-saree.jpg",
+    "stock": 15,
+    "rating": 4.7,
+    "specs": {
+      "fabric": "Georgette",
+      "color": "Red and Gold",
+      "blouseIncluded": true
+    }
+  },
+  {
+    "id": "4",
+    "title": "iPhone 15 Pro Max 256GB",
+    "category": "Phone and Telecommunication",
+    "description": "Latest Apple iPhone with A17 chip, triple camera, and titanium body.",
+    "price": 189999,
+    "image": "https://example.com/images/iphone15.jpg",
+    "stock": 8,
+    "rating": 4.9,
+    "specs": {
+      "color": "Natural Titanium",
+      "battery": "4500mAh",
+      "connectivity": "5G, Wi-Fi 6E"
+    }
+  },
+  {
+    "id": "5",
+    "title": "Dell Inspiron 15 Laptop",
+    "category": "Electronics",
+    "description": "Intel i7, 16GB RAM, 512GB SSD, Windows 11",
+    "price": 79990,
+    "image": "https://example.com/images/dell-laptop.jpg",
+    "stock": 10,
+    "rating": 4.3,
+    "specs": {
+      "processor": "Intel Core i7",
+      "screen": "15.6 inch Full HD",
+      "battery": "6 hours"
+    }
+  },
+  {
+    "id": "6",
+    "title": "Yamaha FZ V3 Bike",
+    "category": "Automobiles",
+    "description": "150cc street motorcycle with advanced braking system.",
+    "price": 124000,
+    "image": "https://example.com/images/yamaha-bike.jpg",
+    "stock": 5,
+    "rating": 4.6,
+    "specs": {
+      "engine": "149cc",
+      "mileage": "45 kmpl",
+      "color": "Matte Black"
+    }
+  },
+  {
+    "id": "7",
+    "title": "Sony 55-inch 4K Smart TV",
+    "category": "Home Appliance",
+    "description": "Ultra HD Android TV with Dolby Vision and voice control.",
+    "price": 64999,
+    "image": "https://example.com/images/sony-tv.jpg",
+    "stock": 6,
+    "rating": 4.8,
+    "specs": {
+      "resolution": "3840x2160",
+      "smartTV": true,
+      "ports": "HDMI x 3, USB x 2"
+    }
+  },
+  {
+    "id": "8",
+    "title": "Mi Smart Watch Revolve",
+    "category": "Electronics",
+    "description": "Smartwatch with AMOLED display, GPS, and 14-day battery life.",
+    "price": 9999,
+    "image": "https://example.com/images/mi-watch.jpg",
+    "stock": 18,
+    "rating": 4.1,
+    "specs": {
+      "display": "AMOLED",
+      "waterResistance": "5 ATM",
+      "features": "Heart rate, sleep tracking"
+    }
+  },
+  {
+    "id": "9",
+    "title": "Bosch Cordless Drill Kit",
+    "category": "Equipment",
+    "description": "18V cordless drill with dual battery and 13 accessories.",
+    "price": 5990,
+    "image": "https://example.com/images/bosch-drill.jpg",
+    "stock": 10,
+    "rating": 4.4,
+    "specs": {
+      "battery": "18V Li-Ion",
+      "warranty": "2 years",
+      "weight": "1.2kg"
+    }
+  },
+  {
+    "id": "10",
+    "title": "Canon EOS 1500D DSLR Camera",
+    "category": "Electronics",
+    "description": "24.1MP DSLR with 18-55mm lens, Wi-Fi and NFC support.",
+    "price": 37999,
+    "image": "https://example.com/images/canon-dslr.jpg",
+    "stock": 7,
+    "rating": 4.5,
+    "specs": {
+      "megapixels": "24.1MP",
+      "connectivity": "Wi-Fi, NFC",
+      "lens": "18-55mm kit"
+    }
+  }
+]

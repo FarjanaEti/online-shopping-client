@@ -8,7 +8,7 @@ import AuthContext from '../../Provider/AuthContext';
 
 
 const Navbar = () => {
-   const { user } = useContext(AuthContext);   
+   const { user,logOut } = useContext(AuthContext);   
    console.log(user);
   //dark light theme
   //lS store key-value pairs.data stay after refreshes or closes the browser.('key', 'value') → to store data('key') → to retrieve data
@@ -27,7 +27,9 @@ const Navbar = () => {
     }, [darkMode]);
   
    const handleLogOut=()=>{
-
+     logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
    }
 
   return (
@@ -81,7 +83,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/allFood">Products</Link></li>
-          <li><Link to="/about">ABout Us</Link></li>
+          <li><Link to="/dashboard">DashBoard</Link></li>
           <li><Link to="/contact">Contact US</Link></li>
           
         </ul>
