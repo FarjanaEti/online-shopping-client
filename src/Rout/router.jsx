@@ -6,6 +6,7 @@ import Error from '../Component/Error'
 import Login from '../Pages/Login'
 import Register from '../Pages/Register'
 import DashBoard from '../Component/DashBoard/DashBoard'
+import SellerHome from '../Component/DashBoard/Seller/SellerHome'
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,14 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<DashBoard></DashBoard>
+    element:<DashBoard></DashBoard>,
+    children:[
+      //Seller
+        {
+          path:'sellerHome',
+          element:<SellerHome></SellerHome>
+        },
+    ]
   }
 
 ])
