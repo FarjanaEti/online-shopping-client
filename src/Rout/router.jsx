@@ -9,6 +9,7 @@ import DashBoard from '../Component/DashBoard/DashBoard'
 import SellerHome from '../Component/DashBoard/Seller/SellerHome'
 import AdminHome from '../Component/DashBoard/Admin/AdminHome'
 import CustomerHome from '../Component/DashBoard/Customer/CustomerHome'
+import AddTask from '../Component/DashBoard/Seller/AddTask'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         {
           path:'sellerHome',
           element:<SellerHome></SellerHome>
+        },
+        {
+          path:'addProduct',
+          element:<AddTask></AddTask>
         },
         {
           path:'adminHome',

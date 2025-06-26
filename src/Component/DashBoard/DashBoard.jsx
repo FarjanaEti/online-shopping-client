@@ -21,7 +21,7 @@ const DashBoard = () => {
                <DashTop></DashTop>
             </div>   
             <div className="lg:flex">
-            <div className="lg:w-64 w-full lg:min-h-screen px-8 border bg-cyan-300 text-white">
+            <div className="lg:w-64 w-full lg:min-h-screen px-8 border bg-gradient-to-b from-red-200 to-blue-300 text-black">
                 <ul className="menu p-4">
                     {role === "admin" ? (
                         <>
@@ -50,9 +50,9 @@ const DashBoard = () => {
                     ) : role === "worker" ? (
                        <>
                        <li>
-                                <NavLink to="/dashboard/workerHome">
+                                <NavLink to="/dashboard/sellerHome">
                                     <FaHome></FaHome>
-                                    Worker Home</NavLink>
+                                    Seller Home</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/dashboard/addProduct">
