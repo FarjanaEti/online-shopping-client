@@ -26,9 +26,9 @@ const Login = () => {
             if (role === "admin") {
                 navigate("/dashboard/adminHome");
             } else if (role === "buyer") {
-                navigate("/dashboard/buyerHome");
+                navigate("/dashboard/customerHome");
             } else if (role === "worker") {
-                navigate("/dashboard/workerHome");
+                navigate("/dashboard/sellerHome");
             } else {
                 navigate(from); 
             }
@@ -97,9 +97,9 @@ const Login = () => {
       if (userRole === "admin") {
         navigate("/dashboard/adminHome");
       } else if (userRole === "worker") {
-        navigate("/dashboard/workerHome");
+        navigate("/dashboard/sellerHome");
       } else {
-        navigate("/dashboard/buyerHome"); 
+        navigate("/dashboard/customerHome"); 
       }
             })
             .catch((err) => {

@@ -7,6 +7,8 @@ import Login from '../Pages/Login'
 import Register from '../Pages/Register'
 import DashBoard from '../Component/DashBoard/DashBoard'
 import SellerHome from '../Component/DashBoard/Seller/SellerHome'
+import AdminHome from '../Component/DashBoard/Admin/AdminHome'
+import CustomerHome from '../Component/DashBoard/Customer/CustomerHome'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
         {
           path:'sellerHome',
           element:<SellerHome></SellerHome>
+        },
+        {
+          path:'adminHome',
+          element:<AdminHome></AdminHome>
+        },
+        {
+          path:'customerHome',
+          element:<CustomerHome></CustomerHome>
         },
     ]
   }
