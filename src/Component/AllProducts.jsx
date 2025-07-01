@@ -1,12 +1,15 @@
-import React from 'react';
-import useProducts from '../../Hooks/useProducts';
+import React, { useState } from 'react';
 import { motion as _motion } from "framer-motion";
+import useProducts from '../Hooks/useProducts';
+import { useForm } from 'react-hook-form';
 
+const AllProducts = () => {
+  const [products] = useProducts();     
+   const [ThreeColumn, setThreeColumn] = useState(true);
+   const { register, handleSubmit } = useForm();
+   const onSearchSubmit=()=>{
 
-const TopProducts = () => {
-  const [products] = useProducts(); 
-  console.log(products);
-
+   }
   return (
     <div className="px-4 md:px-10 py-8  min-h-screen">
       <_motion.h1 
@@ -14,10 +17,36 @@ const TopProducts = () => {
   transition={{ duration: 2, repeat: Infinity }}
   className='text-3xl text-center font-bold mb-8'
 >
-  Top Rating Products
+  All Products
 </_motion.h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+{/* div for search and layout */}
+   <div className='flex md:gap-4  items-center justify-center mx-auto  py-5'>
+       <button 
+       onClick={() => setThreeColumn(!ThreeColumn)}
+      className='btn bg-gradient-to-br from-violet-100 to-violet-300'>
+                              Change Layout</button>                         
+   {/* search */}
+       <div className=" ">
+        <form onSubmit={handleSubmit(onSearchSubmit)}>
+          <input
+            {...register('search')} 
+            type="text"
+            name="search"
+            placeholder="Search Product"
+            className="input input-bordered  md:w-full ml-14 md:ml-0"
+            required
+          />
+        </form>
+      </div>
+   </div>
+
+     <div
+  className={`grid grid-cols-1 sm:grid-cols-2 ${
+    ThreeColumn ? 'md:grid-cols-3' : 'md:grid-cols-4'
+  } gap-6`}
+>
+
         {products?.map(product => (
           <div
             key={product._id}
@@ -58,4 +87,4 @@ const TopProducts = () => {
   );
 };
 
-export default TopProducts;
+export default AllProducts;

@@ -10,6 +10,7 @@ import SellerHome from '../Component/DashBoard/Seller/SellerHome'
 import AdminHome from '../Component/DashBoard/Admin/AdminHome'
 import CustomerHome from '../Component/DashBoard/Customer/CustomerHome'
 import AddTask from '../Component/DashBoard/Seller/AddTask'
+import AllProducts from '../Component/AllProducts'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
    path:'/register',
    element:<Register></Register>
+  },
+  {
+   path:'/allProducts',
+   element:<AllProducts></AllProducts>
   }
     ]
   },

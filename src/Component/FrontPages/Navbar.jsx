@@ -7,9 +7,11 @@ import { MdDarkMode } from 'react-icons/md';
 import AuthContext from '../../Provider/AuthContext';
 
 
+
 const Navbar = () => {
    const { user,logOut } = useContext(AuthContext);   
    console.log(user);
+    
   //dark light theme
   //lS store key-value pairs.data stay after refreshes or closes the browser.('key', 'value') → to store data('key') → to retrieve data
 
@@ -32,6 +34,7 @@ const Navbar = () => {
             .catch(error => console.log(error));
    }
 
+  
   return (
     <div className="navbar mb-3 w-full  py-4 rounded-3xl bg-transparent sticky top-0 z-50 shadow-sm px-16">
       {/* Navbar Start */}
@@ -80,9 +83,9 @@ const Navbar = () => {
 
       {/* Navbar Center  */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal text-xl px-1">
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/allFood">Products</Link></li>
+          <li><Link to="/allProducts">All Products</Link></li>
           <li><Link to="/dashboard">DashBoard</Link></li>
           <li><Link to="/contact">Contact US</Link></li>
           
@@ -100,6 +103,8 @@ const Navbar = () => {
                     className="w-10 mr-1 h-10 rounded-full border"
                 />
             ) : null}
+
+
         <button
       onClick={() => setDarkMode(!darkMode)}//toggle
       style={{
@@ -114,14 +119,15 @@ const Navbar = () => {
     >
       {darkMode ? <MdDarkMode size={24} /> : <CiLight size={24} />}
     </button>
+
         {user ? (
-                <li className="inline-block mx-2">
+                <li className="inline-block text-2xl mx-2">
                     <button onClick={handleLogOut} className="">LogOut</button>
                 </li>
             ) : (
                 <>
-                    <li className="inline-block mx-2"><Link to="/login">LogIn</Link></li>
-                    <li className="inline-block mx-2"><Link to="/register">SignUp</Link></li>
+                    <li className="inline-block text-xl mx-2"><Link to="/login">LogIn</Link></li>
+                    <li className="inline-block text-xl mx-2"><Link to="/register">SignUp</Link></li>
                 </>
             )}
       </div>
