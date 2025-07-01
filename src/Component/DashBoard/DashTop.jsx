@@ -11,7 +11,7 @@ const DashTop = () => {
   const {user}=useAuth();                 
   console.log(user)
     return (
-    <header className="flex items-center justify-between bg-gray-100 p-4 shadow">
+    <header className="flex items-center justify-between bg-gray-100 py-8 md:px-18 shadow">
       {/* Logo */}
       <div className="text-2xl font-bold text-gray-800">
       <Link to={'/'} className="btn btn-ghost normal-case text-xl">

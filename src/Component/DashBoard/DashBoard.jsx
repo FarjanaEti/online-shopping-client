@@ -14,13 +14,13 @@ const DashBoard = () => {
       }
 
      return (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             
-              <div className=" py-8">
+              <div className="md:px-24 py-8">
                 {/* Dashboard Content */}
                <DashTop></DashTop>
             </div>   
-            <div className="lg:flex">
+            <div className="lg:flex  px-24">
             <div className="lg:w-64 w-full lg:min-h-screen px-8 border bg-gradient-to-b from-red-200 to-blue-300 text-black">
                 <ul className="menu p-4">
                     {role === "admin" ? (

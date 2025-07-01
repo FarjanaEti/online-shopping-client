@@ -8,9 +8,9 @@ import Navbar from '../Component/FrontPages/Navbar';
 const Layout = () => {
   
   return (
- <div >  
+ <div className='border  bg-gradient-to-b from-red-200 to-blue-300' >  
    <Navbar></Navbar>
-   <div className='max-w-7xl mx-auto'>
+   <div className='xl:px-36 px-8 lg:px-24'>
 
    <Outlet></Outlet>
    </div>

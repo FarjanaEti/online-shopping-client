@@ -83,7 +83,7 @@ const Register = () => {
             console.warn("User already exists, proceeding to login...");
             navigate('/');
           } else {
-            // ❌ Unexpected error – show alert
+            
             console.error('Error storing user data:', error);
             Swal.fire({
               icon: 'error',
@@ -109,7 +109,7 @@ const Register = () => {
             {/* <Helmet>
                 <title>Earnify | Sign Up</title>
             </Helmet> */}
-            <div className="hero min-h-screen bg-base-200 pt-20">
+            <div className="hero min-h-screen  pt-20">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left h-96 md:w-[500px]">
                         <Lottie animationData={lottieAnimation} loop autoplay />
