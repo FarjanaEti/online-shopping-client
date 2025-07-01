@@ -32,13 +32,13 @@ const TopProducts = () => {
               <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
               <p className="text-sm text-gray-500 my-2">{product.description}</p>
 
-              <p className="text-sm font-medium text-blue-600 mt-2">
+              <p className="text-sm font-medium text-green-600 mt-2">
                 Category: <span className="text-gray-700">{product.category}</span>
               </p>
 
               <div className="flex justify-between items-center mt-4">
                 <span className="text-xl font-bold text-green-600">৳{product.price}</span>
-                <button className="btn btn-sm btn-outline btn-primary">
+                <button className="btn btn-sm btn-outline ">
                   View Details
                 </button>
               </div>
