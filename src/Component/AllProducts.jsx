@@ -2,10 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { motion as _motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
 
+
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [ThreeColumn, setThreeColumn] = useState(true);
   const { register, handleSubmit, reset } = useForm();
+
+  //pagination
+   //const [submissions, _setSubmissions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+// Calculate pagination
+  // ✅ Use products instead
+const totalItems = products.length;
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+const startIndex = (currentPage - 1) * itemsPerPage;
+const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
 
   //  all products 
   useEffect(() => {
@@ -30,7 +43,15 @@ const AllProducts = () => {
     reset();
   };
 
+  
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
+    <div>
     <div className="px-4 md:px-10 py-8 min-h-screen">
       {/*  heading */}
       <_motion.h1
@@ -68,7 +89,7 @@ const AllProducts = () => {
         } gap-6`}
       >
         {products?.length > 0 ? (
-          products.map(product => (
+         currentProducts.map(product => (
             <div
               key={product._id}
               className="bg-gradient-to-r from-pink-200 to-emerald-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
@@ -89,12 +110,65 @@ const AllProducts = () => {
                   <button className="btn btn-sm btn-outline">View Details</button>
                 </div>
               </div>
+    
             </div>
+              
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500 mt-10 text-xl">No products found</p>
         )}
       </div>
+    </div>
+  {/* paging */}
+    <div className="pagination flex justify-center mt-4 mb-12 space-x-2">
+            <button
+              className={`px-4 py-2 border rounded ${
+                currentPage === 1//previous
+                  ? "bg-gradient-to-br from-gray-100 to-violet-200 text-black cursor-not-allowed"
+                  : "bg-gradient-to-br from-violet-200 to-violet-300 text-black "
+              }`}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
+            {[...Array(totalPages).keys()].map((page) => (
+              <button
+                key={page}
+                className={`px-4 py-2 border rounded ${
+                  currentPage === page + 1
+                    ? "bg-gradient-to-br from-blue-400 to-violet-300 text-white"//current button
+                    : "bg-gradient-to-br from-gray-100 to-violet-200 hover:bg-gray-200"//extra button
+                }`}
+                onClick={() => handlePageChange(page + 1)}
+              >
+                {page + 1}
+              </button>
+            ))}
+            <button
+            // next button
+              className={`px-4 py-2 border rounded ${
+                currentPage === totalPages
+                  ? "bg-gradient-to-br from-gray-100 to-violet-200   text-gray-600 cursor-not-allowed"
+                  : "bg-gradient-to-br from-violet-200 to-violet-300 text-black hover:bg-blue-600"
+              }`}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              className="border px-2 py-1 rounded"
+            >
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+   
     </div>
   );
 };
