@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion as Motion } from 'framer-motion';
-
+import { FcAddressBook } from "react-icons/fc";
+import { FaPhoneSquareAlt } from 'react-icons/fa';
+import { LuAlarmClock } from "react-icons/lu";
+import { MdEmail } from "react-icons/md";
 
 const ContactUs = () => {
   return (
@@ -75,22 +78,23 @@ const ContactUs = () => {
           <h3 className="text-2xl font-bold text-violet-300">Contact Info</h3>
 
           <div>
-            <p className="font-medium">📍 Address</p>
+            <p className="font-medium flex items-center  gap-2">
+              <FcAddressBook /> Address</p>
             <p>NeoMartX HQ, 123 Innovation Street, Dhaka, Bangladesh</p>
           </div>
 
           <div>
-            <p className="font-medium">📞 Phone</p>
+            <p className="font-medium flex items-center  gap-2"><FaPhoneSquareAlt /> Phone</p>
             <p>+880 1234-567890</p>
           </div>
 
           <div>
-            <p className="font-medium">✉️ Email</p>
+            <p className="font-medium flex items-center  gap-2"><MdEmail /> Email</p>
             <p>support@neomartx.com</p>
           </div>
 
           <div>
-            <p className="font-medium">⏰ Working Hours</p>
+            <p className="font-medium flex items-center  gap-2"><LuAlarmClock /> Working Hours</p>
             <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
           </div>
         </Motion.div>
