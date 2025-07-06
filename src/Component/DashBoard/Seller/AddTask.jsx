@@ -46,8 +46,8 @@ const AddProduct = () => {
     <div className="px-4 md:px-8 lg:px-20 py-6 min-h-screen bg-gray-50">
 
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-8">
-        <h2 className="text-2xl font-semibold text-center mb-6 text-blue-600">
-          <FaPlusCircle className="inline mr-2 text-blue-500" />
+        <h2 className="text-2xl font-semibold text-center mb-6 bg-gradient-to-br from-violet-100 to-violet-300 ">
+          <FaPlusCircle className="inline mr-2 text-violet-500" />
           Add New Product
         </h2>
 
@@ -127,7 +127,7 @@ const AddProduct = () => {
 
           {/* Submit */}
           <div className="text-center pt-4">
-            <button type="submit" className="btn btn-primary w-full md:w-auto">
+            <button type="submit" className="btn bg-gradient-to-br text-black from-violet-100 to-violet-300 hover:from-gray-300 btn-primary w-full md:w-auto">
               <FaPlusCircle className="mr-2" /> Add Product
             </button>
           </div>

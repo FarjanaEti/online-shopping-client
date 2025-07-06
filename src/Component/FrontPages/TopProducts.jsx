@@ -8,15 +8,15 @@ const TopProducts = () => {
   console.log(products);
    const topSix = [...products]
     .sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)) // descending
-    .slice(0, 6); 
+    .slice(0, 8); 
 
   return (
     <div className="px-4 md:px-10 py-8  min-h-screen">
-      <_motion.h1 
-  animate={{ color: ['#090040', '#722323', '#5409DA'] }} 
-  transition={{ duration: 2, repeat: Infinity }}
-  className='text-3xl text-center font-bold mb-8'
->
+      <_motion.h1
+      className="text-3xl text-center font-bold mb-8 bg-gradient-to-r from-purple-800 via-red-400 to-indigo-600 bg-[length:200%] bg-clip-text text-transparent"
+      animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+    >
   Top Rating Products
 </_motion.h1>
 

@@ -11,6 +11,7 @@ import AdminHome from '../Component/DashBoard/Admin/AdminHome'
 import CustomerHome from '../Component/DashBoard/Customer/CustomerHome'
 import AddTask from '../Component/DashBoard/Seller/AddTask'
 import AllProducts from '../Component/AllProducts'
+import ContactUs from '../Component/ContactUs'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
    path:'/allProducts',
    element:<AllProducts></AllProducts>
+  },
+  {
+   path:'/contactUs',
+   element:<ContactUs></ContactUs>
   }
     ]
   },

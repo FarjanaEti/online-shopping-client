@@ -21,7 +21,7 @@ const DashBoard = () => {
                <DashTop></DashTop>
             </div>   
             <div className="lg:flex  px-24">
-            <div className="lg:w-64 w-full lg:min-h-screen px-8 border bg-gradient-to-b from-red-200 to-blue-300 text-black">
+            <div className="lg:w-64 text-4xl font-semibold w-full lg:min-h-screen px-8 border bg-gradient-to-b from-red-200 to-blue-300 text-black">
                 <ul className="menu p-4">
                     {role === "admin" ? (
                         <>

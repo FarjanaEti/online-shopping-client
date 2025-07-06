@@ -1,9 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import 'animate.css';
-import { useContext, useEffect, useState } from 'react';
-import { CiLight } from 'react-icons/ci';
-import { MdDarkMode } from 'react-icons/md';
+import { useContext } from 'react';
 import AuthContext from '../../Provider/AuthContext';
 
 
@@ -12,22 +10,6 @@ const Navbar = () => {
    const { user,logOut } = useContext(AuthContext);   
    console.log(user);
     
-  //dark light theme
-  //lS store key-value pairs.data stay after refreshes or closes the browser.('key', 'value') → to store data('key') → to retrieve data
-
-  const [darkMode, setDarkMode] = useState(//store the current theme
-      localStorage.getItem("theme") === "dark"//theme is the key to save dark in LS
-    );
-   useEffect(() => {//update when the them changes
-      if (darkMode) {// true false
-        document.body.classList.add("dark-mode");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.body.classList.remove("dark-mode");
-        localStorage.setItem("theme", "light");
-      }
-    }, [darkMode]);
-  
    const handleLogOut=()=>{
      logOut()
             .then(() => { })
@@ -72,8 +54,14 @@ const Navbar = () => {
            
             <Link to="/" className="block text-3xl  text-center mt-3">
     
-     <h1 className="animate__animated animate__pulse
-      animate__infinite">NeoMartX</h1>
+      <h1
+  className="text-4xl font-extrabold text-center 
+  bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70]
+  bg-clip-text text-transparent w-fit mx-auto animate__animated animate__pulse
+      animate__infinite "
+>
+  NeoMartX
+</h1>
 
      
     </Link>
@@ -87,7 +75,7 @@ const Navbar = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/allProducts">All Products</Link></li>
           <li><Link to="/dashboard">DashBoard</Link></li>
-          <li><Link to="/contact">Contact US</Link></li>
+          <li><Link to="/contactUs">Contact US</Link></li>
           
         </ul>
       </div>
@@ -105,20 +93,7 @@ const Navbar = () => {
             ) : null}
 
 
-        <button
-      onClick={() => setDarkMode(!darkMode)}//toggle
-      style={{
-        padding: "10px",
-        borderRadius: "50%",
-        backgroundColor: darkMode ? "#333" : "#ddd",
-        color: darkMode ? "#fff" : "#000",
-        border: "none",
-        cursor: "pointer",
-       
-      }}
-    >
-      {darkMode ? <MdDarkMode size={24} /> : <CiLight size={24} />}
-    </button>
+     
 
         {user ? (
                 <li className="inline-block text-2xl mx-2">

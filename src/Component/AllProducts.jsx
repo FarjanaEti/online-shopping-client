@@ -7,25 +7,28 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [ThreeColumn, setThreeColumn] = useState(true);
   const { register, handleSubmit, reset } = useForm();
+  const [filtered, setFiltered] = useState([]);
 
   //pagination
-   //const [submissions, _setSubmissions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
 // Calculate pagination
-  // ✅ Use products instead
 const totalItems = products.length;
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 const startIndex = (currentPage - 1) * itemsPerPage;
-const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
+const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
 
   //  all products 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  fetch("http://localhost:5000/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(data);
+      setFiltered(data); 
+    });
+}, []);
+
 
   //  Search products
   const onSearchSubmit = (searchData) => {
@@ -33,22 +36,33 @@ const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
     if (searchQuery) {
       fetch(`http://localhost:5000/products?searchParam=${searchQuery}`)
         .then((res) => res.json())
-        .then((data) => setProducts(data));
+        .then((data) => {
+        setFiltered(data);     
+        setCurrentPage(1);      
+      });
     } else {
-      // If search is empty, reload all products
-      fetch("http://localhost:5000/products")
-        .then((res) => res.json())
-        .then((data) => setProducts(data));
+      
+     setFiltered(products);
+    setCurrentPage(1);
     }
     reset();
   };
-
-  
-
   // Handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+
+  //category
+  const handleCategoryFilter = (category) => {
+  if (category === "All") {
+    setFiltered(products);
+  } else {
+    const results = products.filter(p => p.category === category);
+    setFiltered(results);
+  }
+  setCurrentPage(1); // reset to first page on filter
+};
 
   return (
     <div>
@@ -81,6 +95,30 @@ const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
           <button type="submit" className="btn bg-gradient-to-br from-violet-100 to-violet-300 ml-2">Search</button>
         </form>
       </div>
+
+     {/* category */}
+  <_motion.h1
+        animate={{ color: ['#090040', '#722323', '#5409DA'] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className='text-3xl text-center font-bold mb-8'
+      >
+        Categories
+      </_motion.h1>
+   {products.length > 0 && (
+  <div className="flex flex-wrap gap-2 justify-center mb-6">
+    
+    {["All", ...new Set(products.map(p => p.category))].map(cat => (
+      <button
+        key={cat}
+        onClick={() => handleCategoryFilter(cat)}
+        className="btn btn-sm bg-gradient-to-br from-violet-100 to-violet-300 hover:from-gray-300 hover:to-gray-400"
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+)}
+
 
       {/* Products Grid */}
       <div
