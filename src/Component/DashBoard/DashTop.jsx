@@ -15,8 +15,8 @@ const DashTop = () => {
       {/* Logo */}
       <div className="text-2xl font-bold text-gray-800">
       <Link to={'/'} className="btn btn-ghost normal-case text-xl">
-                   <FaShopify  className="text-black text-4xl"/>
-                            <h1
+ <FaShopify  className=" bg-gradient-to-rfrom-[#BA487F] via-[#722323] to-[#254D70] text-white rounded-2xl p-1  text-4xl"/>
+   <h1
   className="text-4xl font-extrabold text-center 
   bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70]
   bg-clip-text text-transparent w-fit mx-auto animate__animated animate__pulse

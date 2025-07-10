@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import 'animate.css';
 import { useContext } from 'react';
 import AuthContext from '../../Provider/AuthContext';
+import { FaShopify } from 'react-icons/fa';
 
 
 
@@ -52,8 +53,9 @@ const Navbar = () => {
         <a className=" hidden lg:block btn-ghost text-xl mb-6">
           <div className='flex space-x-5'>
            
-            <Link to="/" className="block text-3xl  text-center mt-3">
-    
+   <Link to="/" className="block text-3xl  text-center mt-3">
+   <div className='flex  items-center gap-2'>
+           <FaShopify  className=" bg-gradient-to-r    from-[#BA487F] via-[#722323] to-[#254D70] text-white rounded-2xl p-1  text-4xl"/>
       <h1
   className="text-4xl font-extrabold text-center 
   bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70]
@@ -61,9 +63,10 @@ const Navbar = () => {
       animate__infinite "
 >
   NeoMartX
-</h1>
-
-     
+</h1>  
+           </div>
+   
+  
     </Link>
           </div>
         </a>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion as _motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 
 const AllProducts = () => {
@@ -69,7 +70,7 @@ const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
     <div className="px-4 md:px-10 py-8 min-h-screen">
       {/*  heading */}
       <_motion.h1
-        animate={{ color: ['#090040', '#722323', '#5409DA'] }}
+        animate={{ color: ['#D69ADE', '#BA487F', '#A2AADB'] }}
         transition={{ duration: 2, repeat: Infinity }}
         className='text-3xl text-center font-bold mb-8'
       >
@@ -98,7 +99,7 @@ const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
 
      {/* category */}
   <_motion.h1
-        animate={{ color: ['#090040', '#722323', '#5409DA'] }}
+        animate={{ color: ['#D69ADE', '#BA487F', '#A2AADB'] }}
         transition={{ duration: 2, repeat: Infinity }}
         className='text-3xl text-center font-bold mb-8'
       >
@@ -130,22 +131,27 @@ const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
          currentProducts.map(product => (
             <div
               key={product._id}
-              className="bg-gradient-to-r from-pink-200 to-emerald-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+              className="bg-gradient-to-br from-violet-100 via-white to-violet-200  rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
             >
               <img
                 src={product.image || 'https://via.placeholder.com/300x200?text=No+Image'}
                 alt={product.title}
                 className="w-full h-72 object-cover p-3 rounded-t-xl"
               />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
-                <p className="text-sm text-gray-500 my-2">{product.description}</p>
-                <p className="text-sm font-medium text-green-600 mt-2">
+              <div className="p-4 ">
+                <h3 className="text-2xl font-semibold text-gray-800">{product.title}</h3>
+                <p className="text-xl text-gray-500 my-2">{product.description}</p>
+                <p className="text-xl font-bold text-purple-400 mt-2">
                   Category: <span className="text-gray-700">{product.category}</span>
                 </p>
                 <div className="flex justify-between items-center mt-4">
-                  <span className="text-xl font-bold text-green-600">৳{product.price}</span>
-                  <button className="btn btn-sm btn-outline">View Details</button>
+                  <span className="text-xl font-bold text-purple-600">৳{product.price}</span>
+
+                  <Link to={`/products/${product._id}`}> <button
+                  className="btn btn-outline" >
+                  View Details
+                </button></Link>
+                  
                 </div>
               </div>
     
@@ -157,6 +163,7 @@ const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
         )}
       </div>
     </div>
+
   {/* paging */}
     <div className="pagination flex justify-center mt-4 mb-12 space-x-2">
             <button
