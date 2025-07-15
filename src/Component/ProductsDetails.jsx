@@ -85,7 +85,8 @@ const handleCartPopup = (product) => {
         url: product.url,
         price: product.price || 0,
         email: user?.email,
-        quantity: result.value.quantity
+        quantity: result.value.quantity,
+        image:product.image,
       };
 
       fetch('http://localhost:5000/cart', {

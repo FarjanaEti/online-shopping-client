@@ -25,7 +25,8 @@ const TopProducts = () => {
         {topSix?.map(product => (
           <div
             key={product._id}
-            className="bg-gradient-to-r from-pink-200 to-emerald-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+            className="bg-gradient-to-br from-violet-100 via-white
+               to-violet-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
             <img
               src={product.image || 'https://via.placeholder.com/300x200?text=No+Image'}
@@ -36,16 +37,16 @@ const TopProducts = () => {
               <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
               <p className="text-sm text-gray-500 my-2">{product.description}</p>
 
-              <p className="text-sm font-medium text-green-600 mt-2">
+              <p className="text-sm font-medium text-violet-600 mt-2">
                 Category: <span className="text-gray-700">{product.category}</span>
               </p>
-              <p className="text-sm font-medium text-green-600 mt-2">
+              <p className="text-sm font-medium text-violet-600 mt-2">
                 
             Rating: <span className="text-gray-700">{product.rating}</span>
               </p>
 
               <div className="flex justify-between items-center mt-4">
-                <span className="text-xl font-bold text-green-600">৳{product.price}</span>
+                <span className="text-xl font-bold text-violet-600">৳{product.price}</span>
                 <Link to={`/products/${product._id}`}> <button
                   className="btn btn-outline" >
                   View Details

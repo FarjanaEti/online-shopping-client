@@ -131,7 +131,8 @@ const currentProducts = filtered.slice(startIndex, startIndex + itemsPerPage);
          currentProducts.map(product => (
             <div
               key={product._id}
-              className="bg-gradient-to-br from-violet-100 via-white to-violet-200  rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+              className="bg-gradient-to-br from-violet-100 via-white
+               to-violet-200  rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
             >
               <img
                 src={product.image || 'https://via.placeholder.com/300x200?text=No+Image'}
