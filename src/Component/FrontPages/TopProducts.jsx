@@ -1,6 +1,7 @@
 import React from 'react';
 import useProducts from '../../Hooks/useProducts';
 import { motion as _motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 
 const TopProducts = () => {
@@ -45,9 +46,10 @@ const TopProducts = () => {
 
               <div className="flex justify-between items-center mt-4">
                 <span className="text-xl font-bold text-green-600">৳{product.price}</span>
-                <button className="btn btn-sm btn-outline ">
+                <Link to={`/products/${product._id}`}> <button
+                  className="btn btn-outline" >
                   View Details
-                </button>
+                </button></Link>
               </div>
             </div>
           </div>

@@ -1,15 +1,19 @@
 import React, {  useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {motion as Motion } from "framer-motion";
+import { useContext } from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import AuthContext from '../Provider/AuthContext';
-//import useAxiosPublic from './useAxiosPublic';
-const ProductsDetails = () => {
-const { id } = useParams();   
-     //const axiosPublic=useAxiosPublic();                     
- // const {user}=useContext(AuthContext)
-  const [product, setProducts] = useState();
 
-  //const [submission, setSubmission] = useState("");
+const MySwal = withReactContent(Swal);
+
+
+const ProductsDetails = () => {
+    const { id } = useParams();   
+    const [product, setProducts] = useState();
+    const { user } = useContext(AuthContext);
+    
    
    useEffect(() => {
   fetch(`http://localhost:5000/products/${id}`)
@@ -26,10 +30,86 @@ const { id } = useParams();
       console.error("Error fetching task:", error.message);
     });
 }, [id]);
-
-
   if (!product) return <div className="text-center py-20">Loading...</div>;
-return (
+
+//cart popUp********************************
+const handleCartPopup = (product) => {
+  let quantity = 1;
+
+  MySwal.fire({
+    title: <strong>{product.title}</strong>,
+    html: `
+      <img src="${product.image}" alt="${product.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;" />
+      <p style="margin-top: 10px;">Price: <strong>৳ ${product.price || 0}</strong></p>
+      <div style="margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <button id="decrease" style="padding: 5px 10px;">-</button>
+        <span id="quantity">${quantity}</span>
+        <button id="increase" style="padding: 5px 10px;">+</button>
+      </div>
+    `,
+    showCancelButton: true,
+    confirmButtonText: 'Add to Cart',
+    focusConfirm: false,
+     customClass: {
+      popup: 'swal-wide-modal' 
+    },
+    preConfirm: () => {
+      const qty = parseInt(document.getElementById('quantity').textContent);
+      return { quantity: qty };
+    },
+    didOpen: () => {
+      const qtyDisplay = document.getElementById('quantity');
+      const incBtn = document.getElementById('increase');
+      const decBtn = document.getElementById('decrease');
+
+      incBtn.addEventListener('click', () => {
+        quantity++;
+        qtyDisplay.textContent = quantity;
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          qtyDisplay.textContent = quantity;
+        }
+      });
+    }
+  }).then(result => {
+    if (result.isConfirmed) {
+      const cartItem = {
+        title: product.title,
+        genre: product.genre,
+        duration: product.duration,
+        releaseYear: product.releaseYear,
+        rating: product.rating,
+        url: product.url,
+        price: product.price || 0,
+        email: user?.email,
+        quantity: result.value.quantity
+      };
+
+      fetch('http://localhost:5000/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartItem)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.insertedId) {
+            Swal.fire('✅ Added!', `${product.title} added to cart.`, 'success');
+          } else {
+            Swal.fire('⚠️ Error', 'Failed to add to cart.', 'error');
+          }
+        })
+        .catch(() => {
+          Swal.fire('❌ Server Error', 'Please try again later.', 'error');
+        });
+    }
+  });
+};
+
+
+  return (
  <div className='p-5 text-xl'>
  <Motion.h1
          animate={{ color: ['#D69ADE', '#BA487F', '#A2AADB'] }}
@@ -68,9 +148,13 @@ return (
 
           {/* Buttons */}
           <div className="flex gap-4 mt-4">
-            <button className="bg-gradient-to-br from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-blue-700 transition-all">
-              Add to Cart
-            </button>
+           <button
+  className="bg-gradient-to-br from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-blue-700 transition-all"
+  onClick={() => handleCartPopup(product)}
+>
+  Add to Cart
+</button>
+
             <button className="bg-gradient-to-br from-violet-300 to-violet-100 px-4 py-2 rounded hover:bg-blue-100 transition-all">
               Wishlist
             </button>

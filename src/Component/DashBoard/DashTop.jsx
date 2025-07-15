@@ -11,11 +11,12 @@ const DashTop = () => {
   const {user}=useAuth();                 
   console.log(user)
     return (
-    <header className="flex items-center justify-between bg-gray-100 py-8 md:px-18 shadow">
+    <header className="flex items-center justify-between bg-gradient-to-b
+             from-red-200 to-blue-300 py-8 md:px-18 shadow">
       {/* Logo */}
       <div className="text-2xl font-bold text-gray-800">
       <Link to={'/'} className="btn btn-ghost normal-case text-xl">
- <FaShopify  className=" bg-gradient-to-rfrom-[#BA487F] via-[#722323] to-[#254D70] text-white rounded-2xl p-1  text-4xl"/>
+ <FaShopify  className=" bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70] text-white rounded-2xl p-1  text-4xl"/>
    <h1
   className="text-4xl font-extrabold text-center 
   bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70]
@@ -34,10 +35,10 @@ const DashTop = () => {
          
           {/* User Info */}
           <div className="flex flex-col items-end">
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-sm font-bold text-gray-800">
               {users.role || "Unknown Role"} 
             </span>
-            <span className="text-sm text-gray-600">
+            <span className="text-xl text-gray-600">
               {users.name || "Anonymous"} 
             </span>
           </div>

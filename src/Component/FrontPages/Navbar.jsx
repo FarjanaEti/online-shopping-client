@@ -55,7 +55,9 @@ const Navbar = () => {
            
    <Link to="/" className="block text-3xl  text-center mt-3">
    <div className='flex  items-center gap-2'>
-           <FaShopify  className=" bg-gradient-to-r    from-[#BA487F] via-[#722323] to-[#254D70] text-white rounded-2xl p-1  text-4xl"/>
+           <FaShopify  className=" bg-gradient-to-r 
+           from-[#BA487F] via-[#722323] to-[#254D70]
+            text-white rounded-2xl p-1  text-4xl"/>
       <h1
   className="text-4xl font-extrabold text-center 
   bg-gradient-to-r from-[#BA487F] via-[#722323] to-[#254D70]

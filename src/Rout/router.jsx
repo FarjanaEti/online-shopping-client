@@ -13,6 +13,7 @@ import AddTask from '../Component/DashBoard/Seller/AddTask'
 import AllProducts from '../Component/AllProducts'
 import ContactUs from '../Component/ContactUs'
 import ProductsDetails from '../Component/ProductsDetails'
+import CartItem from '../Component/DashBoard/Customer/CartItem'
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         {
           path:'customerHome',
           element:<CustomerHome></CustomerHome>
+        },
+        {
+          path:'cart',
+          element:<CartItem></CartItem>
         },
     ]
   }

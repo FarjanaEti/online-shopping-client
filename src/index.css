@@ -26,3 +26,7 @@
   background-color: #555;
   color: white;
 }
+
+.swal-wide-modal {
+  @apply max-w-3xl w-full;
+}
