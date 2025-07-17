@@ -14,6 +14,7 @@ import AllProducts from '../Component/AllProducts'
 import ContactUs from '../Component/ContactUs'
 import ProductsDetails from '../Component/ProductsDetails'
 import CartItem from '../Component/DashBoard/Customer/CartItem'
+import WishList from '../Component/DashBoard/Customer/WishList'
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
         {
           path:'cart',
           element:<CartItem></CartItem>
+        },
+        {
+          path:'wishlist',
+          element:<WishList></WishList>
         },
     ]
   }

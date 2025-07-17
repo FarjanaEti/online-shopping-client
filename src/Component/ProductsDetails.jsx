@@ -129,13 +129,13 @@ const handleCartPopup = (product) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Image */}
-        <div className="w-full">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full h-96 object-contain rounded-lg"
-          />
-        </div>
+        <div className="group relative w-full h-96 overflow-hidden rounded-lg border">
+  <img
+    src={product.image}
+    alt={product.title}
+    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-150"
+  />
+</div>
 
         {/* Product Info */}
         <div className="space-y-4">
