@@ -109,6 +109,33 @@ const handleCartPopup = (product) => {
   });
 };
 
+//wishlist
+const handleWishlist=(productW)=>{
+console.log(productW);
+ const wishListItem = {
+        title: productW.title,
+        rating: productW.rating,
+        category: productW.category,
+        price: productW.price || 0,
+        image:productW.image,
+         email: user?.email,
+      };
+
+      fetch('http://localhost:5000/wish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(wishListItem)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.insertedId) {
+            Swal.fire('✅ Added!', `${product.title} added to your wishlist.`, 'success');
+          } else {
+            Swal.fire('⚠️ Error', 'Failed to add to cart.', 'error');
+          }
+        })
+
+}
 
   return (
  <div className='p-5 text-xl'>
@@ -149,18 +176,22 @@ const handleCartPopup = (product) => {
 
           {/* Buttons */}
           <div className="flex gap-4 mt-4">
-           <button
-  className="bg-gradient-to-br from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-blue-700 transition-all"
+  <button
+  className="bg-gradient-to-br cursor-pointer from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-blue-700 transition-all"
   onClick={() => handleCartPopup(product)}
->
+   >
   Add to Cart
 </button>
 
-            <button className="bg-gradient-to-br from-violet-300 to-violet-100 px-4 py-2 rounded hover:bg-blue-100 transition-all">
+            <button className="bg-gradient-to-br cursor-pointer
+             from-violet-300 to-violet-100 px-4 py-2 rounded
+              hover:bg-blue-100 transition-all"
+              onClick={() => handleWishlist(product)}
+              >
               Wishlist
             </button>
              <button
-    className="bg-gradient-to-br from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-green-700 transition-all"
+    className="bg-gradient-to-br cursor-pointer from-violet-100 to-violet-300 text-black px-4 py-2 rounded hover:bg-green-700 transition-all"
 //     onClick={() => handleBuyNow(product)}
   >
     Buy Now
