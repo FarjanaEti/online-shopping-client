@@ -15,68 +15,79 @@ import ContactUs from '../Component/ContactUs'
 import ProductsDetails from '../Component/ProductsDetails'
 import CartItem from '../Component/DashBoard/Customer/CartItem'
 import WishList from '../Component/DashBoard/Customer/WishList'
+import BuyProduct from '../Component/DashBoard/Customer/BuyProduct'
+import Profile from '../Component/DashBoard/profile'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element:<Layout></Layout>,
-  errorElement:<Error></Error>,
+    element: <Layout></Layout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: '/',
         element: <Home></Home>
       },
       {
-  path:'/login',
-   element:<Login></Login>
-  },
-  {
-   path:'/register',
-   element:<Register></Register>
-  },
-  {
-   path:'/allProducts',
-   element:<AllProducts></AllProducts>
-  },
-  {
-   path:'/contactUs',
-   element:<ContactUs></ContactUs>
-  },
-  {
-          path:'products/:id',
-          element:<ProductsDetails></ProductsDetails>
-        }
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/register',
+        element: <Register></Register>
+      },
+      {
+        path: '/allProducts',
+        element: <AllProducts></AllProducts>
+      },
+      {
+        path: '/contactUs',
+        element: <ContactUs></ContactUs>
+      },
+      {
+        path: 'products/:id',
+        element: <ProductsDetails></ProductsDetails>
+      },
+      {
+        path: "/buy",
+        element: <BuyProduct></BuyProduct>
+      }
     ]
   },
   {
-    path:'/dashboard',
-    element:<DashBoard></DashBoard>,
-    children:[
+    path: '/dashboard',
+    element: <DashBoard></DashBoard>,
+    children: [
       //Seller
-        {
-          path:'sellerHome',
-          element:<SellerHome></SellerHome>
-        },
-        {
-          path:'addProduct',
-          element:<AddTask></AddTask>
-        },
-        {
-          path:'adminHome',
-          element:<AdminHome></AdminHome>
-        },
-        {
-          path:'customerHome',
-          element:<CustomerHome></CustomerHome>
-        },
-        {
-          path:'cart',
-          element:<CartItem></CartItem>
-        },
-        {
-          path:'wishlist',
-          element:<WishList></WishList>
-        },
+      {
+        path: 'sellerHome',
+        element: <SellerHome></SellerHome>
+      },
+      {
+        path: 'addProduct',
+        element: <AddTask></AddTask>
+      },
+      {
+        path: 'adminHome',
+        element: <AdminHome></AdminHome>
+      },
+      {
+        path: 'customerHome',
+        element: <CustomerHome></CustomerHome>
+      },
+      {
+        path: 'cart',
+        element: <CartItem></CartItem>
+      },
+      {
+        path: 'wishlist',
+        element: <WishList></WishList>
+      },
+      {
+        path: 'profile',
+        element: <Profile></Profile>
+      }
+      
     ]
   }
 
