@@ -1,15 +1,21 @@
-
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import Swal from "sweetalert2";
+import AuthContext from "../../../Provider/AuthContext";
 
 const BuyProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useContext(AuthContext);
 
   // Get product from state
   const { product } = location.state || {};
 
   const [quantity, setQuantity] = useState(1);
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   // If no product is passed, fallback
   if (!product) {
     return (
@@ -25,18 +31,51 @@ const BuyProduct = () => {
     );
   }
 
-  
-
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleConfirmPurchase = () => {
-    alert(
-      ` Order placed: ${product.title} (x${quantity}) - Total: $${
-        product.price * quantity
-      }`
-    );
+    const orderItem = {
+      productId: product._id,
+      title: product.title,
+      rating: product.rating,
+      category: product.category,
+      price: product.price || 0,
+      image: product.image,
+
+      // buyer info
+      email: user?.email,
+      userName: user?.displayName || "Anonymous",
+      address: shippingAddress || "Not provided",
+      phone: phoneNumber || "Not provided",
+
+      // order details
+      quantity: quantity,
+      totalPrice: (product.price || 0) * quantity,
+      paymentStatus: "pending",
+      deliveryStatus: "processing",
+
+      // system fields
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    fetch("http://localhost:5000/orders", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(orderItem),
+})
+  .then((res) => res.json())
+  .then((data) => {
+    if (data.insertedId) {
+      Swal.fire("Success!", "Order placed successfully.", "success");
+    } else {
+      Swal.fire("Error", "Failed to place order.", "error");
+    }
+  })
+  .catch((err) => console.error("Order error:", err));
+
   };
 
   return (
@@ -84,12 +123,30 @@ const BuyProduct = () => {
               +
             </button>
           </div>
+
+          {/* Shipping Info */}
+          <div className="mt-4">
+            <input
+              type="text"
+              placeholder="Shipping Address"
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+              className="w-full mb-2 px-3 py-2 border rounded"
+            />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+            />
+          </div>
         </div>
 
         {/* Right: Price + Actions */}
         <div className="text-right">
           <p className="text-xl font-semibold mb-2 text-purple-600">
-            Price: ${product.price * quantity}
+            Total: ${product.price * quantity}
           </p>
 
           <div className="mt-4">

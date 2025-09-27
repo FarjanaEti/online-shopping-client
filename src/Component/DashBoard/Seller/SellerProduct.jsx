@@ -45,14 +45,14 @@ const SellerProduct = () => {
           <h2 className="text-lg font-semibold">Total Products</h2>
           <p className="text-2xl">{sellerProduct.length}</p>
         </div>
-        <div className="p-4 bg-green-100 rounded-lg text-center">
+        <div className="p-4 bg-red-100 rounded-lg text-center">
           <h2 className="text-lg font-semibold">Total Value</h2>
           <p className="text-2xl">
             $
             {sellerProduct.reduce((sum, p) => sum + parseFloat(p.price), 0)}
           </p>
         </div>
-        <div className="p-4 bg-yellow-100 rounded-lg text-center">
+        <div className="p-4 bg-purple-100 rounded-lg text-center">
           <h2 className="text-lg font-semibold">Pending Orders</h2>
           <p className="text-2xl">5</p> {/* later connect with orders API */}
         </div>
@@ -60,7 +60,7 @@ const SellerProduct = () => {
 
       {/* Add Product Button */}
       <Link to="/dashboard/addProduct">
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
+        <button className="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
           + Add Product
         </button>
       </Link>

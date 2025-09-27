@@ -97,13 +97,13 @@ const ProductsDetails = () => {
           .then(res => res.json())
           .then(data => {
             if (data.insertedId) {
-              Swal.fire('✅ Added!', `${product.title} added to cart.`, 'success');
+              Swal.fire(' Added!', `${product.title} added to cart.`, 'success');
             } else {
-              Swal.fire('⚠️ Error', 'Failed to add to cart.', 'error');
+              Swal.fire(' Error', 'Failed to add to cart.', 'error');
             }
           })
           .catch(() => {
-            Swal.fire('❌ Server Error', 'Please try again later.', 'error');
+            Swal.fire(' Server Error', 'Please try again later.', 'error');
           });
       }
     });
@@ -129,9 +129,9 @@ const ProductsDetails = () => {
       .then(res => res.json())
       .then(data => {
         if (data.insertedId) {
-          Swal.fire('✅ Added!', `${product.title} added to your wishlist.`, 'success');
+          Swal.fire(' Added!', `${product.title} added to your wishlist.`, 'success');
         } else {
-          Swal.fire('⚠️ Error', 'Failed to add to cart.', 'error');
+          Swal.fire(' Error', 'Failed to add to cart.', 'error');
         }
       })
 
