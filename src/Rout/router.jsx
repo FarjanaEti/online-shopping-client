@@ -17,6 +17,7 @@ import CartItem from '../Component/DashBoard/Customer/CartItem'
 import WishList from '../Component/DashBoard/Customer/WishList'
 import BuyProduct from '../Component/DashBoard/Customer/BuyProduct'
 import Profile from '../Component/DashBoard/profile'
+import SellerProduct from '../Component/DashBoard/Seller/SellerProduct'
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: 'sellerHome',
         element: <SellerHome></SellerHome>
+      },
+      {
+        path: 'sellerProduct',
+        element: <SellerProduct></SellerProduct>
       },
       {
         path: 'addProduct',

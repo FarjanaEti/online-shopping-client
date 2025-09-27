@@ -63,7 +63,7 @@ const DashBoard = () => {
                                      </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/myProducts">
+                                <NavLink to="/dashboard/sellerProduct">
                                  <FaBoxOpen></FaBoxOpen>
                                    My Products
                                   </NavLink>
