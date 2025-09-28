@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -8,6 +9,20 @@ const SellerProduct = () => {
   const [products, setProducts] = useState([]);
   const { user } = useAuth();
 
+  //getting order palaced by user on a seller product
+  const axiosPublic = useAxiosPublic();
+  const [order, setOrder] = useState([]);
+  console.log(order.length);
+  useEffect(() => {
+    if (user?.email) {
+      axiosPublic
+        .get(`/orders?email=${user.email}`)
+        .then((res) => {
+          setOrder(res.data);
+        })
+        .catch((err) => console.error("Error fetching order:", err));
+    }
+  }, [user, axiosPublic]);
   
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -54,7 +69,7 @@ const SellerProduct = () => {
         </div>
         <div className="p-4 bg-purple-100 rounded-lg text-center">
           <h2 className="text-lg font-semibold">Pending Orders</h2>
-          <p className="text-2xl">5</p> {/* later connect with orders API */}
+          <p className="text-2xl">{order.length}</p> {/* later connect with orders API */}
         </div>
       </div>
 
