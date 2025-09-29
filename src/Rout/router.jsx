@@ -18,6 +18,7 @@ import WishList from '../Component/DashBoard/Customer/WishList'
 import BuyProduct from '../Component/DashBoard/Customer/BuyProduct'
 import Profile from '../Component/DashBoard/profile'
 import SellerProduct from '../Component/DashBoard/Seller/SellerProduct'
+import OrderReceived from '../Component/DashBoard/Seller/OrderReceived'
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: 'addProduct',
         element: <AddTask></AddTask>
+      },
+      {
+        path: 'order',
+        element: <OrderReceived></OrderReceived>
       },
       {
         path: 'adminHome',

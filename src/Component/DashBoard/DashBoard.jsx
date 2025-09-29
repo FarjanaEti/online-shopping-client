@@ -69,7 +69,7 @@ const DashBoard = () => {
                                   </NavLink>
                             </li>
                              <li>
-                       <NavLink to="/dashboard/orders">
+                       <NavLink to="/dashboard/order">
                             <FaClipboardList></FaClipboardList>
                            Orders Received
                              </NavLink>
