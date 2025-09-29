@@ -27,9 +27,9 @@ const Register = () => {
             const userInfo = {
                 name: data.name,
                 email: data.email,
-                //url: uploadedImageUrl || data.photoURL, // Use uploaded image URL or original photo URL
+                url: "https://i.ibb.co.com/TxF8HFNw/gratisography-augmented-reality-800x525.jpg",
                 role: data.role,
-                coin: data.role === "worker" ? 10 : 50,
+               
             };
 
             const res = await axiosPublic.post("/users", userInfo);
@@ -66,6 +66,7 @@ const Register = () => {
       const userInfo = {
         email: user?.email,
         name: user?.displayName,
+        url:user.photoURL,
         role: 'worker',
       };
 
@@ -79,7 +80,7 @@ const Register = () => {
         })
         .catch((error) => {
           if (error.response?.status === 400 && error.response?.data?.message === "User already exist") {
-            // ✅ User already exists – treat it as success
+            
             console.warn("User already exists, proceeding to login...");
             navigate('/');
           } else {

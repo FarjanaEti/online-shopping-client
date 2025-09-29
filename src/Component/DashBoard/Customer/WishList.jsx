@@ -26,10 +26,11 @@ const Wishlist = () => {
         <FaHeart className="text-purple-400" /> My Wishlist</h2>
 
       <div className="space-y-4">
+      
         {wishlist.map((item) => (
           <div
             key={item._id}
-            className="flex flex-col sm:flex-row items-center justify-between bg-white shadow-md rounded-lg p-4  border-b-2 gap-4"
+            className="flex flex-col sm:flex-row items-center justify-between bg-purple-50 shadow-md rounded-lg p-4  border-b-2 gap-4"
           >
             {/* Image */}
             <div className="w-full border  sm:w-32 flex-shrink-0">

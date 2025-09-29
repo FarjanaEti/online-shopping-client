@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 const DashTop = () => {
   const [cart] = useCart();
   const {user}=useAuth();                 
-  console.log(user)
+  //console.log(user,cart)
     return (
     <header className="flex items-center justify-between bg-gradient-to-b
              from-red-200 to-blue-300 py-8 md:px-18 shadow">
