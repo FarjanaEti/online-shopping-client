@@ -114,9 +114,7 @@ const Login = () => {
     };
    return (
         <>
-            {/* <Helmet>
-                <title>Earnify | Login</title>
-            </Helmet> */}
+            
             <div className="hero pt-20 min-h-screen ">
                 <div className="hero-content flex-col md:flex-row-reverse">
                     <div className="text-center lg:text-left w-96">

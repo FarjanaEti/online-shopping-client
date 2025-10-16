@@ -19,6 +19,7 @@ import BuyProduct from '../Component/DashBoard/Customer/BuyProduct'
 import Profile from '../Component/DashBoard/profile'
 import SellerProduct from '../Component/DashBoard/Seller/SellerProduct'
 import OrderReceived from '../Component/DashBoard/Seller/OrderReceived'
+import MyOrder from '../Component/DashBoard/Customer/MyOrder'
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: 'cart',
         element: <CartItem></CartItem>
+      },
+      {
+        path: 'my_order',
+        element: <MyOrder></MyOrder>
       },
       {
         path: 'wishlist',

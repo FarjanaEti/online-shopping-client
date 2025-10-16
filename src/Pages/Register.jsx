@@ -22,7 +22,7 @@ const Register = () => {
             const result = await createUser(data.email, data.password);
             const _loggedUser = result.user;
 
-            //await updateUserProfile(data.name, uploadedImageUrl || data.photoURL); // Use uploaded image URL if successful
+            
 
             const userInfo = {
                 name: data.name,
@@ -107,9 +107,7 @@ const Register = () => {
 
     return (
         <>
-            {/* <Helmet>
-                <title>Earnify | Sign Up</title>
-            </Helmet> */}
+            
             <div className="hero min-h-screen  pt-20">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left h-96 md:w-[500px]">

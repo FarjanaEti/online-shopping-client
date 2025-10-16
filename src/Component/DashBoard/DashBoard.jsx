@@ -95,7 +95,7 @@ const DashBoard = () => {
                                    </NavLink>
                             </li>
                             <li>
-                               <NavLink to="/dashboard/myOrders">
+                               <NavLink to="/dashboard/my_order">
                               <FaTasks />
                               My Orders
                            </NavLink>
