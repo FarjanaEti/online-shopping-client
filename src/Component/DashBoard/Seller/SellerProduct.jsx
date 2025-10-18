@@ -13,6 +13,7 @@ const SellerProduct = () => {
   const axiosPublic = useAxiosPublic();
   const [order, setOrder] = useState([]);
   console.log(order.length);
+  
   useEffect(() => {
     if (user?.email) {
       axiosPublic

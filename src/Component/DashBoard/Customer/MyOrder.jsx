@@ -7,6 +7,23 @@ const MyOrders = () => {
   const axiosPublic = useAxiosPublic();
   const [orders, setOrders] = useState([]);
  console.log(orders)
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      fetch(`http://localhost:5000/orders/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+           if (data.success) {
+      alert(data.message);
+      setOrders((prev) => prev.filter((p) => p._id !== id));
+    }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  
   useEffect(() => {
     if (user?.email) {
       axiosPublic
@@ -78,7 +95,9 @@ const MyOrders = () => {
                     Qty: {order.quantity || 1}
                   </p>
                 </div>
-                <button className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
+                <button
+                 onClick={() => handleDelete(order._id)}
+                 className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
                   Cancel Order
                 </button>
               </div>
