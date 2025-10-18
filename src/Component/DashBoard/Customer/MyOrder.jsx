@@ -78,8 +78,8 @@ const MyOrders = () => {
                     Qty: {order.quantity || 1}
                   </p>
                 </div>
-                <button className="px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
-                  View Details
+                <button className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
+                  Cancel Order
                 </button>
               </div>
             </div>

@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useContext } from 'react';
 import Swal from "sweetalert2";
 import AuthContext from "../../../Provider/AuthContext";
 
@@ -9,18 +8,17 @@ const BuyProduct = () => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
 
-  // Get product from state
   const { product } = location.state || {};
 
   const [quantity, setQuantity] = useState(1);
   const [shippingAddress, setShippingAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  // If no product is passed, fallback
   if (!product) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-semibold"> No product selected!</h2>
+        <h2 className="text-xl font-semibold">No product selected!</h2>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 px-4 py-2 bg-gray-300 rounded"
@@ -35,7 +33,8 @@ const BuyProduct = () => {
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-  const handleConfirmPurchase = () => {
+  // 🔹 Handle Cash on Delivery
+  const handleCashOnDelivery = () => {
     const orderItem = {
       productId: product._id,
       title: product.title,
@@ -47,43 +46,50 @@ const BuyProduct = () => {
       // buyer info
       email: user?.email,
       userName: user?.displayName || "Anonymous",
-      address: shippingAddress || "Not provided",
-      phone: phoneNumber || "Not provided",
+      address: shippingAddress || "No address",
+      phone: phoneNumber || "No number",
 
       // order details
       quantity: quantity,
       totalPrice: (product.price || 0) * quantity,
       paymentStatus: "pending",
       deliveryStatus: "processing",
+      paymentMethod: "Cash on Delivery",
 
-      // system fields
       createdAt: new Date(),
       updatedAt: new Date(),
     };
 
     fetch("http://localhost:5000/orders", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(orderItem),
-})
-  .then((res) => res.json())
-  .then((data) => {
-    if (data.insertedId) {
-      Swal.fire("Success!", "Order placed successfully.", "success");
-    } else {
-      Swal.fire("Error", "Failed to place order.", "error");
-    }
-  })
-  .catch((err) => console.error("Order error:", err));
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire("Success!", "Order placed successfully.", "success");
+          setShowDropdown(false);
+        } else {
+          Swal.fire("Error", "Failed to place order.", "error");
+        }
+      })
+      .catch((err) => console.error("Order error:", err));
+  };
 
+  // 🔹 Handle Online Payment (navigate to payment page)
+  const handleOnlinePayment = () => {
+    navigate("/payment", {
+      state: { product, quantity, shippingAddress, phoneNumber },
+    });
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 my-20 bg-purple-100 rounded-xl shadow-lg">
+    <div className="max-w-6xl mx-auto p-6 my-20 bg-purple-100 rounded-xl shadow-lg relative">
       <h2 className="text-3xl font-bold mb-6 text-center">Buy Product</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        {/* Left: Product Image */}
+        {/* Product Image */}
         <div className="flex justify-center">
           <img
             src={product.image}
@@ -92,7 +98,7 @@ const BuyProduct = () => {
           />
         </div>
 
-        {/* Middle: Details */}
+        {/* Product Info */}
         <div>
           <h3 className="text-xl font-bold mb-2">{product.title}</h3>
           <p className="text-gray-600 mb-1">
@@ -143,26 +149,46 @@ const BuyProduct = () => {
           </div>
         </div>
 
-        {/* Right: Price + Actions */}
-        <div className="text-right">
+        
+        <div className="text-right relative">
           <p className="text-xl font-semibold mb-2 text-purple-600">
             Total: ${product.price * quantity}
           </p>
 
-          <div className="mt-4">
+          <div className="mt-4 relative inline-block">
+          
             <button
-              onClick={handleConfirmPurchase}
+              onClick={() => setShowDropdown(!showDropdown)}
               className="bg-purple-600 font-bold text-white px-5 py-2 rounded hover:bg-purple-700 transition"
             >
-              Confirm Purchase
+              Confirm Purchase ▾
             </button>
-            <button
-              onClick={() => navigate(-1)}
-              className="ml-4 bg-gray-300 text-black px-5 py-2 rounded hover:bg-gray-400 transition"
-            >
-              Cancel
-            </button>
+
+            {/* paymentt */}
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded shadow-lg z-10">
+                <button
+                  onClick={handleOnlinePayment}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                   Online Payment
+                </button>
+                <button
+                  onClick={handleCashOnDelivery}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                   Cash on Delivery
+                </button>
+              </div>
+            )}
           </div>
+
+          <button
+            onClick={() => navigate(-1)}
+            className="ml-4 bg-gray-300 text-black px-5 py-2 rounded hover:bg-gray-400 transition"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

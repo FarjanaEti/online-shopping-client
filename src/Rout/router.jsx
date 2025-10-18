@@ -20,6 +20,7 @@ import Profile from '../Component/DashBoard/profile'
 import SellerProduct from '../Component/DashBoard/Seller/SellerProduct'
 import OrderReceived from '../Component/DashBoard/Seller/OrderReceived'
 import MyOrder from '../Component/DashBoard/Customer/MyOrder'
+import Payment from '../Component/DashBoard/Customer/Payment'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/buy",
         element: <BuyProduct></BuyProduct>
+      },
+      {
+        path: "/payment",
+        element: <Payment></Payment>
       }
     ]
   },
