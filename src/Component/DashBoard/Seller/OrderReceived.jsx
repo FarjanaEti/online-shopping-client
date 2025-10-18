@@ -20,6 +20,22 @@ const OrderReceived = () => {
     }
   }, [user, axiosPublic]);
 
+  //order cancel by seller
+     const handleDelete = (id) => {
+      fetch(`http://localhost:5000/orders/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+           if (data.success) {
+      alert(data.message);
+      setOrders((prev) => prev.filter((p) => p._id !== id));
+    }
+        })
+        .catch((err) => console.error(err));
+    }
+  ;
+
   return (
     <div className="max-w-7xl mx-auto my-12 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-center text-purple-700">
@@ -105,7 +121,9 @@ const OrderReceived = () => {
                       <button className="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-600">
                         Mark as Delivered
                       </button>
-                      <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                      <button 
+                      onClick={() => handleDelete(order._id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
                         Cancel
                       </button>
                     </div>

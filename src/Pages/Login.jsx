@@ -156,7 +156,7 @@ const Login = () => {
                             </div>
                         </form>
                         <div>
-                            <button onClick={handleGoogleLogIn} className="btn ml-7 mb-3">
+                            <button onClick={handleGoogleLogIn} className="btn ml-7 hover:rounded-3xl hover:bg-blue-500 mb-3">
                                 <FaGoogle></FaGoogle> LogIn With Google
                             </button>
                             <p>

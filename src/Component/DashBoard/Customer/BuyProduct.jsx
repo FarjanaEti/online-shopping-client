@@ -33,7 +33,7 @@ const BuyProduct = () => {
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-  // 🔹 Handle Cash on Delivery
+  // Handle Cash on Delivery
   const handleCashOnDelivery = () => {
     const orderItem = {
       productId: product._id,
@@ -77,12 +77,58 @@ const BuyProduct = () => {
       .catch((err) => console.error("Order error:", err));
   };
 
-  // 🔹 Handle Online Payment (navigate to payment page)
+  // Handle Online Payment (navigate to payment page)
   const handleOnlinePayment = () => {
-    navigate("/payment", {
-      state: { product, quantity, shippingAddress, phoneNumber },
-    });
+  const orderItem = {
+    productId: product._id,
+    title: product.title,
+    rating: product.rating,
+    category: product.category,
+    price: product.price || 0,
+    image: product.image,
+
+    // buyer info
+    email: user?.email,
+    userName: user?.displayName || "Anonymous",
+    address: shippingAddress || "No address",
+    phone: phoneNumber || "No number",
+
+    // order details
+    quantity: quantity,
+    totalPrice: (product.price || 0) * quantity,
+    paymentStatus: "paid", // since user chose online payment
+    deliveryStatus: "processing",
+    paymentMethod: "Online Payment",
+
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
+
+  fetch("http://localhost:5000/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderItem),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.insertedId) {
+        // Navigate to payment confirmation page or success screen
+        navigate("/payment", {
+          state: {
+            product,
+            quantity,
+            shippingAddress,
+            phoneNumber,
+            orderId: data.insertedId,
+          },
+        });
+      } else {
+        Swal.fire("Error", "Failed to create order for online payment.", "error");
+      }
+    })
+    .catch((err) => console.error("Order creation error:", err));
+};
+
 
   return (
     <div className="max-w-6xl mx-auto p-6 my-20 bg-purple-100 rounded-xl shadow-lg relative">
@@ -164,7 +210,7 @@ const BuyProduct = () => {
               Confirm Purchase ▾
             </button>
 
-            {/* paymentt */}
+            {/* payment */}
             {showDropdown && (
               <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded shadow-lg z-10">
                 <button
