@@ -11,16 +11,17 @@ const OrderReceived = () => {
   const axiosPublic = useAxiosPublic();
   const [orders, setOrders] = useState([]);
   console.log(orders)
+  
   useEffect(() => {
-    if (user?.email) {
-      axiosPublic
-        .get(`/orders?email=${user.email}`)
-        .then((res) => {
-          setOrders(res.data);
-        })
-        .catch((err) => console.error("Error fetching orders:", err));
-    }
-  }, [user, axiosPublic]);
+  if (user?.email) {
+    axiosPublic
+      .get(`/orders?sellerEmail=${user.email}`) // backend should accept sellerEmail
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.error("Error fetching orders:", err));
+  }
+}, [user, axiosPublic]);
+
+
 
   //delivery status
   const handleMarkDelivered = async (orderId) => {

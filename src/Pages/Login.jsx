@@ -10,7 +10,7 @@ import useCart from "../Hooks/useCart";
 import AuthContext from "../Provider/AuthContext";
 
 const Login = () => {
-   const [disabled, setDisabled] = useState(true);
+   const [ setDisabled] = useState(true);//disabled,
     const { signIn, googleSignIn } = useContext(AuthContext);
     const [user] = useCart();
     const navigate = useNavigate();
@@ -152,7 +152,8 @@ const Login = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <input
-                                 disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
+                                 //disabled={disabled} 
+                                 className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
                         <div>

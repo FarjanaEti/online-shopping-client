@@ -25,13 +25,14 @@ const MyOrders = () => {
   };
   
   useEffect(() => {
-    if (user?.email) {
-      axiosPublic
-        .get(`/orders?email=${user.email}`)
-        .then((res) => setOrders(res.data))
-        .catch((err) => console.error("Error fetching orders:", err));
-    }
-  }, [user, axiosPublic]);
+  if (user?.email) {
+    axiosPublic
+      .get(`/orders?buyerEmail=${user.email}`)
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.error("Error fetching orders:", err));
+  }
+}, [user, axiosPublic]);
+
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -55,15 +56,24 @@ const MyOrders = () => {
                 <span className="text-sm text-gray-500">
                   Order ID: <span className="font-medium">{order._id}</span>
                 </span>
-                <span
-                  className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                    order.status === "Completed"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
-                >
-                  {order.status || "Pending"}
-                </span>
+                {order.status === "delivered" ? (
+  <div className="flex items-center gap-3">
+    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+      Product Received
+    </span>
+    <button
+      className="px-3 py-1 text-xs font-semibold rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition"
+      //onClick={() => handleReturnOrExchange(order._id)}
+    >
+      Return / Exchange
+    </button>
+  </div>
+) : (
+  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700">
+    {order.status || "Processing"}
+  </span>
+)}
+
               </div>
 
               {/* Product Section */}

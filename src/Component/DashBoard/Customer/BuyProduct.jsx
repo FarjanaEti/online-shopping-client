@@ -14,7 +14,7 @@ const BuyProduct = () => {
   const [shippingAddress, setShippingAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-
+   console.log(product)
   if (!product) {
     return (
       <div className="p-6 text-center">
@@ -42,6 +42,7 @@ const BuyProduct = () => {
       category: product.category,
       price: product.price || 0,
       image: product.image,
+      worker_email:product.email,
 
       // buyer info
       email: user?.email,
@@ -86,6 +87,7 @@ const BuyProduct = () => {
     category: product.category,
     price: product.price || 0,
     image: product.image,
+    worker_email:product.email,
 
     // buyer info
     email: user?.email,
