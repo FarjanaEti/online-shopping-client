@@ -3,12 +3,14 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import { CiLocationOn } from "react-icons/ci";
 import { FaPhone } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const OrderReceived = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [orders, setOrders] = useState([]);
-  
+  console.log(orders)
   useEffect(() => {
     if (user?.email) {
       axiosPublic
@@ -19,6 +21,37 @@ const OrderReceived = () => {
         .catch((err) => console.error("Error fetching orders:", err));
     }
   }, [user, axiosPublic]);
+
+  //delivery status
+  const handleMarkDelivered = async (orderId) => {
+    try {
+      const res = await axios.put(`http://localhost:5000/orders/${orderId}/delivered`);
+      if (res.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Order marked as delivered!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        // Update UI instantly
+        setOrders((prevOrders) =>
+          prevOrders.map((order) =>
+            order._id === orderId
+              ? { ...order, status: "delivered", deliveredAt: new Date() }
+              : order
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update order",
+        text: "Please try again later.",
+      });
+    }
+  };
 
   //order cancel by seller
      const handleDelete = (id) => {
@@ -105,12 +138,12 @@ const OrderReceived = () => {
                   <td className="px-4 py-2 border">
                     <span
                       className={`px-2 py-1 rounded text-xs font-semibold ${
-                        order.deliveryStatus === "delivered"
+                        order.status === "delivered"
                           ? "bg-green-100 text-green-600"
                           : "bg-blue-100 text-blue-600"
                       }`}
                     >
-                      {order.deliveryStatus}
+                      {order.status}
                     </span>
                   </td>
                   <td className="px-4 py-2 border">
@@ -118,7 +151,9 @@ const OrderReceived = () => {
                       <button className="bg-purple-500 text-white px-3 py-1 rounded hover:bg-green-600">
                         Mark as Paid
                       </button>
-                      <button className="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-600">
+                      <button
+                       onClick={() => handleMarkDelivered(order._id)}
+                      className="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-600">
                         Mark as Delivered
                       </button>
                       <button 

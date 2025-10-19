@@ -53,7 +53,7 @@ const BuyProduct = () => {
       quantity: quantity,
       totalPrice: (product.price || 0) * quantity,
       paymentStatus: "pending",
-      deliveryStatus: "processing",
+      status: "processing",
       paymentMethod: "Cash on Delivery",
 
       createdAt: new Date(),
@@ -97,7 +97,7 @@ const BuyProduct = () => {
     quantity: quantity,
     totalPrice: (product.price || 0) * quantity,
     paymentStatus: "paid", // since user chose online payment
-    deliveryStatus: "processing",
+    status: "processing",
     paymentMethod: "Online Payment",
 
     createdAt: new Date(),
