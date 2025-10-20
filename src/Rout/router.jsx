@@ -21,6 +21,7 @@ import SellerProduct from '../Component/DashBoard/Seller/SellerProduct'
 import OrderReceived from '../Component/DashBoard/Seller/OrderReceived'
 import MyOrder from '../Component/DashBoard/Customer/MyOrder'
 import Payment from '../Component/DashBoard/Customer/Payment'
+import Exchange from '../Component/DashBoard/Customer/Exchange'
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,11 @@ const router = createBrowserRouter([
         path: 'my_order',
         element: <MyOrder></MyOrder>
       },
+      {
+    path: "exchange",
+    element: <Exchange></Exchange>
+  },
+
       {
         path: 'wishlist',
         element: <WishList></WishList>

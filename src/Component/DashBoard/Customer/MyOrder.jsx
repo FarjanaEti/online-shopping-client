@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [orders, setOrders] = useState([]);
  console.log(orders)
+
+ //=exchange
+ const navigate = useNavigate();
+
+  const handleExchange = (order) => {
+    navigate(`/dashboard/exchange`, { state: { order } });
+  };
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
@@ -63,7 +71,8 @@ const MyOrders = () => {
     </span>
     <button
       className="px-3 py-1 text-xs font-semibold rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition"
-      //onClick={() => handleReturnOrExchange(order._id)}
+       onClick={() => handleExchange(order)}
+
     >
       Return / Exchange
     </button>
