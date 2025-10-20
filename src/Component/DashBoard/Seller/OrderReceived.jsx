@@ -15,7 +15,7 @@ const OrderReceived = () => {
   useEffect(() => {
   if (user?.email) {
     axiosPublic
-      .get(`/orders?sellerEmail=${user.email}`) // backend should accept sellerEmail
+      .get(`/orders?sellerEmail=${user.email}`) 
       .then((res) => setOrders(res.data))
       .catch((err) => console.error("Error fetching orders:", err));
   }

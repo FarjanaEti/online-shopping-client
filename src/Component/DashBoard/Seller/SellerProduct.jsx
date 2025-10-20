@@ -11,17 +11,15 @@ const SellerProduct = () => {
 
   //getting order palaced by user on a seller product
   const axiosPublic = useAxiosPublic();
-  const [order, setOrder] = useState([]);
+  const [order, setOrders] = useState([]);
   console.log(order.length);
   
   useEffect(() => {
     if (user?.email) {
       axiosPublic
-        .get(`/orders?email=${user.email}`)
-        .then((res) => {
-          setOrder(res.data);
-        })
-        .catch((err) => console.error("Error fetching order:", err));
+        .get(`/orders?sellerEmail=${user.email}`) 
+        .then((res) => setOrders(res.data))
+        .catch((err) => console.error("Error fetching orders:", err));
     }
   }, [user, axiosPublic]);
   
