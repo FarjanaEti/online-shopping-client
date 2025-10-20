@@ -156,12 +156,12 @@ const SellerHome = () => {
           </div>
         </div>
         <div className="bg-white shadow-md rounded-2xl p-6 flex flex-col justify-center items-center gap-4">
-          <Link to='/dashboard/addProduct' className="bg-purple-300 text-white px-4 py-2 rounded-lg w-full">
+          <Link to='/dashboard/addProduct' className="bg-purple-200 text-white px-4 py-2 rounded-lg w-full">
           <button className="bg-purple-200 text-black px-4 font-semibold  rounded-lg w-full">
             + Add Product
           </button>
           </Link>
-          <button className="bg-purple-300 text-black font-bold px-4 py-2 rounded-lg w-full">
+          <button className="bg-blue-200 text-black font-bold px-4 py-2 rounded-lg w-full">
             Withdraw Earnings
           </button>
         </div>
